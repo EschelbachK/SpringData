@@ -1,4 +1,6 @@
 package org.example.springdata.model;
 
-public record Student() {
-}
+import lombok.With;
+
+@With
+public record Student(String id, String name, int age) {}
