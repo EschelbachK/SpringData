@@ -3,7 +3,6 @@ package org.example.springdata.service;
 import org.example.springdata.model.Student;
 import org.example.springdata.repo.StudentRepo;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
