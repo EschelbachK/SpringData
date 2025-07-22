@@ -2,7 +2,7 @@ package org.example.springdata.controller;
 
 
 import org.example.springdata.model.Student;
-import org.example.springdata.repo.StudentRepo;
+import org.example.springdata.service.StudentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,40 +11,35 @@ import java.util.List;
 @RequestMapping("/api/student")
 public class StudentController {
 
-    private final StudentRepo repo;
+    private final StudentService service;
 
-    public StudentController(StudentRepo repo) {
-        this.repo = repo;
+
+    public StudentController(StudentService service) {
+        this.service = service;
     }
 
     @GetMapping
     public List<Student> getAllStudents() {
-        return repo.findAll();
+        return service.getAllStudents();
     }
 
     @GetMapping("/{id}")
     public Student getStudentById(@PathVariable String id) {
-        return repo.findById(id).orElse(null);
+        return service.getStudentById(id);
     }
 
     @PostMapping
     public Student addStudent(@RequestBody Student student) {
-        return repo.save(student);
+        return service.addStudent(student);
     }
 
     @PutMapping("/{id}")
     public Student updateStudent(@PathVariable String id, @RequestBody Student student) {
-        Student oldData = repo.findById(id).orElse(null);
-        if (oldData != null) {
-            repo.save(oldData
-                    .withAge(student.age())
-                    .withName(student.name()));
-        }
-        return student;
+        return service.updateStudent(id, student);
     }
 
     @DeleteMapping("/{id}")
     public void deleteStudent(@PathVariable String id) {
-        repo.deleteById(id);
+        service.deleteStudent(id);
     }
 }
