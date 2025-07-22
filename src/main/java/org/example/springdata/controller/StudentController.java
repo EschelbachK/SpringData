@@ -1,6 +1,7 @@
 package org.example.springdata.controller;
 
 
+import org.example.springdata.dto.StudentDTO;
 import org.example.springdata.model.Student;
 import org.example.springdata.service.StudentService;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +30,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public Student addStudent(@RequestBody Student student) {
-        return service.addStudent(student);
+    public Student addStudent(@RequestBody StudentDTO dto) {
+        return service.addStudent(dto);
     }
 
     @PutMapping("/{id}")

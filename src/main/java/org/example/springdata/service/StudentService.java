@@ -1,10 +1,12 @@
 package org.example.springdata.service;
 
 import org.example.springdata.model.Student;
+import org.example.springdata.dto.StudentDTO;
 import org.example.springdata.repo.StudentRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class StudentService {
@@ -21,7 +23,12 @@ public class StudentService {
     public Student getStudentById(String id) {
         return repo.findById(id).orElse(null);
     }
-    public Student addStudent(Student student) {
+    public Student addStudent(StudentDTO dto) {
+        Student student = new Student(
+        UUID.randomUUID().toString(),
+                dto.name(),
+                dto.age()
+                );
         return repo.save(student);
     }
     public Student updateStudent(String id, Student student) {
